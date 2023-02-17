@@ -58,9 +58,12 @@ services:
     # Caddy provides an automatic HTTPS reverse proxy with Let's Encrypt cert provisioning
     # Uses local Dockerfile to include tzdata package
     # https://caddyserver.com/
-    build: ./docker/caddy
+    image: caddy/caddy:alpine
     restart: always
     container_name: proxy
+    build: 
+      context: caddy
+      dockerfile: caddy.Dockerfile
     volumes:
     - ${PWD}/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
     - ${PWD}/caddy/data:/data
